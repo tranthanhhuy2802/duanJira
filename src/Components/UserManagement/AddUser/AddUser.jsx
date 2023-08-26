@@ -1,25 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { userService } from "../../../services/userService";
 import { Input, message } from "antd";
-import {
-  LockOutlined,
-  UserOutlined,
-  PhoneOutlined,
-} from "@ant-design/icons";
-import { NavLink, useNavigate } from "react-router-dom";
-import { userService } from "../../services/userService";
-const FormSignUp = () => {
+import { UserOutlined, LockOutlined, PhoneOutlined } from "@ant-design/icons";
 
-  const navigate = useNavigate();
-  const [messageApi, contextHolder] = message.useMessage();
+const AddUser = () => {
+  const [messageApi] = message.useMessage();
 
   const formik = useFormik({
     initialValues: {
-      email: "",
       passWord: "",
-      name: "",
+      email: "",
       phoneNumber: "",
+      name: "",
     },
     onSubmit: (values) => {
       console.log(values);
@@ -28,14 +22,11 @@ const FormSignUp = () => {
         .signUpUser(values)
         .then((res) => {
           console.log(res);
-          messageApi.success("Đăng Kí Thành Công");
-          setTimeout(() => {
-            navigate("/");
-          }, [2000]);
+          alert("Đăng Kí Thành Công");
         })
         .catch((error) => {
           console.log(error);
-          messageApi.error(error.response.data.message);
+          alert(error.response.data.message);
         });
     },
     validationSchema: yup.object({
@@ -51,12 +42,20 @@ const FormSignUp = () => {
         .min(9, "ít nhất 9 số"),
     }),
   });
-  const { handleChange, handleSubmit, errors, touched } = formik;
 
+  //   const userNg = {
+  //     taiKhoan: "",
+  //     matKhau: "string",
+  //     email: "string",
+  //     soDt: "string",
+  //     maNhom: "string",
+  //     maLoaiNguoiDung: "string",
+  //     hoTen: "string",
+  //   };
+
+  const { handleChange, handleSubmit, touched, errors, values } = formik;
   return (
-    <div className="">
-      {contextHolder}
-      <h3 className="text-4xl mb-5 font-medium">Sign Up</h3>
+    <div>
       <form onSubmit={handleSubmit}>
         <div className="mb-6">
           <label
@@ -69,7 +68,7 @@ const FormSignUp = () => {
             type="email"
             name="email"
             status={errors.email && touched.email ? "error" : ""}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-1/2 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Email"
             prefix={<UserOutlined />}
             onChange={handleChange}
@@ -91,7 +90,7 @@ const FormSignUp = () => {
             type="password"
             name="passWord"
             status={errors.passWord && touched.passWord ? "error" : ""}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-1/2 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Password"
             prefix={<LockOutlined />}
             onChange={handleChange}
@@ -113,7 +112,7 @@ const FormSignUp = () => {
             type="text"
             name="name"
             status={errors.name && touched.name ? "error" : ""}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-1/2 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Your Name"
             prefix={<UserOutlined />}
             onChange={handleChange}
@@ -135,7 +134,7 @@ const FormSignUp = () => {
             type="number"
             name="phoneNumber"
             status={errors.phoneNumber && touched.phoneNumber ? "error" : ""}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-1/2 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="phone number"
             prefix={<PhoneOutlined />}
             onChange={handleChange}
@@ -150,17 +149,11 @@ const FormSignUp = () => {
           type="submit"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-1.5  text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
-          Sign Up
+          Thêm
         </button>
-        <span className="ml-5">
-          Already a member?
-          <NavLink className="text-blue-400 ml-1" to="/">
-            Login
-          </NavLink>
-        </span>
       </form>
     </div>
   );
 };
 
-export default FormSignUp;
+export default AddUser;

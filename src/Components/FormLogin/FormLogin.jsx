@@ -38,7 +38,7 @@ const FormLogin = () => {
 
           luuXuongLocal("user", res.data.content);
           setTimeout(() => {
-            navigate("/user");
+            navigate("/usermanager");
           }, [2000]);
         })
         .catch((error) => {
