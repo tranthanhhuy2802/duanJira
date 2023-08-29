@@ -22,7 +22,7 @@ const AddUser = () => {
         .signUpUser(values)
         .then((res) => {
           console.log(res);
-          alert("Đăng Kí Thành Công");
+          alert(res.data.message);
         })
         .catch((error) => {
           console.log(error);

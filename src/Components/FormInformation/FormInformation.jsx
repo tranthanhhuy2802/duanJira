@@ -1,38 +1,40 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Input, message } from "antd";
 import { LockOutlined, UserOutlined, PhoneOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userService } from "../../../services/userService";
-import { getAllUser } from "../../../redux/slice/userSlice";
-
-const EditUser = () => {
-  const [messageApi, contextHolder] = message.useMessage();
-  const dispatch = useDispatch();
-  const { editUser } = useSelector((state) => {
+import { userService } from "../../services/userService";
+const FormInformation = () => {
+  const { hoTen } = useSelector((state) => {
     return state.user;
   });
-  // console.log(editUser);
-
+  // console.log(hoTen);
+  const [messageApi, contextHolder] = message.useMessage();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      id: editUser[0]?.userId,
-      email: editUser[0]?.email,
+      id: hoTen.id,
+      email: hoTen.email,
       passWord: null,
-      name: editUser[0]?.name,
-      phoneNumber: editUser[0]?.phoneNumber,
+      name: hoTen.name,
+      phoneNumber: hoTen.phoneNumber,
     },
     enableReinitialize: true,
+
     onSubmit: (values) => {
       console.log(values);
-      // xử lí gửi dữ liệu lên sever
+      //   xử lí gửi dữ liệu lên sever
       userService
         .editUser(values)
         .then((res) => {
           console.log(res);
-          messageApi.success("Thay Đổi Thành Công");
-          dispatch(getAllUser());
+          messageApi.success("Thay Đổi Thông Tin Thành Công");
+          setTimeout(() => {
+            navigate("/");
+          }, [1500]);
         })
         .catch((error) => {
           console.log(error);
@@ -53,9 +55,7 @@ const EditUser = () => {
         .min(9, "ít nhất 9 số"),
     }),
   });
-  const { handleChange, handleSubmit, errors, touched, values, setFieldValue } =
-    formik;
-  // console.log(formik.values);
+  const { handleChange, handleSubmit, errors, touched, values } = formik;
 
   return (
     <div className="">
@@ -69,13 +69,12 @@ const EditUser = () => {
             User ID
           </label>
           <Input
-            id="id"
+            id="userId"
             readOnly
             type="text"
-            name="id"
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            name="userId"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-2/3 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
             prefix={<LockOutlined />}
-            onChange={handleChange}
             value={values.id}
           />
         </div>
@@ -87,11 +86,12 @@ const EditUser = () => {
             Email
           </label>
           <Input
+            readOnly
             type="email"
             name="email"
             id="email"
             status={errors.email && touched.email ? "error" : ""}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-2/3 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Email"
             prefix={<UserOutlined />}
             onChange={handleChange}
@@ -103,18 +103,18 @@ const EditUser = () => {
             ""
           )}
         </div>
-        <div className="mb-6">
+        {/* <div className="mb-6">
           <label
             htmlFor="password"
             className="block mb-2 text-sm font-medium text-gray-900 "
           >
             Password
           </label>
-          <Input.Password
+          {/* <Input.Password
             type="password"
             name="passWord"
             status={errors.passWord && touched.passWord ? "error" : ""}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-2/3 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Password"
             prefix={<LockOutlined />}
             onChange={handleChange}
@@ -124,8 +124,8 @@ const EditUser = () => {
             <p className="text-red-500">{errors.passWord}</p>
           ) : (
             ""
-          )}
-        </div>
+          )} */}
+        {/* </div> */}
         <div className="mb-6">
           <label
             htmlFor="text"
@@ -134,10 +134,11 @@ const EditUser = () => {
             Your Name
           </label>
           <Input
+            readOnly
             type="text"
             name="name"
             status={errors.name && touched.name ? "error" : ""}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-2/3 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Your Name"
             prefix={<UserOutlined />}
             onChange={handleChange}
@@ -157,10 +158,11 @@ const EditUser = () => {
             Phone Number
           </label>
           <Input
+            readOnly
             type="number"
             name="phoneNumber"
             status={errors.phoneNumber && touched.phoneNumber ? "error" : ""}
-            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-2/3 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="phone number"
             prefix={<PhoneOutlined />}
             onChange={handleChange}
@@ -172,15 +174,15 @@ const EditUser = () => {
             ""
           )}
         </div>
-        <button
+        {/* <button
           type="submit"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-1.5  text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           Cập Nhật
-        </button>
+        </button> */}
       </form>
     </div>
   );
 };
 
-export default EditUser;
+export default FormInformation;

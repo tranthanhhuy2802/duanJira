@@ -4,6 +4,9 @@ import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp";
 import AdminTemplate from "./template/AdminTemplate";
 import UserManagement from "./pages/UserMagement/UserManagement";
+import PageInformation from "./pages/PageInformation/PagaInformation";
+import ProjectManagement from "./pages/ProjectMangement/ProjectManagement";
+import ProjectDetail from "./Components/ProjectManagement/ProjectDetail/ProjectDetail";
 
 function App() {
   return (
@@ -12,8 +15,11 @@ function App() {
         <Route index element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="*" element={<Page404 />} />
-        <Route path="/admin" element={<AdminTemplate />}>
+        <Route path="/" element={<AdminTemplate />}>
           <Route path="usermanager" element={<UserManagement />} />
+          <Route path="information" element={<PageInformation />} />
+          <Route path="projectmanager" element={<ProjectManagement />} />
+          <Route path="projectDetail/:id" element={<ProjectDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -17,4 +17,10 @@ export const userService = {
   deleteUser: (userId) => {
     return https.delete(`/api/Users/deleteUser?id=${userId}`);
   },
+  getUserbyId: (userId) => {
+    return https.get(`/api/Users/getUser?keyword=${userId}`);
+  },
+  editUser: (data) => {
+    return https.put(`/api/Users/editUser`, data);
+  },
 };

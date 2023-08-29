@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Input, Space, Button, message, Form, Checkbox } from "antd";
@@ -12,7 +12,7 @@ import { luuXuongLocal } from "../../utils/localStore";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userService } from "../../services/userService";
-// import { setDuLieuHoTen } from "../../redux/Slice/nguoiDungSlice";
+import { setDuLieuHoTen } from "../../redux/slice/userSlice";
 const FormLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,22 +23,22 @@ const FormLogin = () => {
       email: "",
       passWord: "",
     },
+
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
       // xử lí gửi dữ liệu lên sever
       userService
         .loginUser(values)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           messageApi.success("Đăng Nhập Thành Công");
           // nếu như login thành công, sẽ lưu data xuống local và chuyển người dùng tới trang chủ
 
           // khi gọi dữ liệu thành công, sẽ lấy dữ liệu đó truyền lên redux
-          // dispatch(setDuLieuHoTen(res.data.content));
-
+          dispatch(setDuLieuHoTen(res.data.content));
           luuXuongLocal("user", res.data.content);
           setTimeout(() => {
-            navigate("/usermanager");
+            navigate("/projectmanager");
           }, [2000]);
         })
         .catch((error) => {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import TabUser from "../../Components/UserManagement/TabUser/TabUser";
-import { getAllUser } from "../../redux/slice/userSlice";
-import AddUser from "../../Components/UserManagement/AddUser/AddUser";
 import { Drawer } from "antd";
+import TableProject from "../../Components/ProjectManagement/TableProject/TableProject";
+import { getAllProject } from "../../redux/slice/projectSlice";
+import CreateProject from "../../Components/ProjectManagement/CreateProject/CreateProject";
 
-const UserManagement = () => {
+const ProjectManagement = () => {
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
@@ -17,8 +17,7 @@ const UserManagement = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // console.log(users);
-    dispatch(getAllUser());
+    dispatch(getAllProject());
   }, []);
 
   // một hàm vừa gọi dữ liệu vừa truyền dữ liệu lên redux
@@ -30,23 +29,23 @@ const UserManagement = () => {
     <div>
       <button
         onClick={showDrawer}
-        className=" text-white py-2 px-5 my-5 rounded-md bg-blue-500 hover:bg-blue-700"
+        className="bg-blue-500 rounded-md hover:bg-blue-700 text-white py-2 px-5 my-5"
       >
-        Thêm mới
+        Create Project
       </button>
       <Drawer
-        size="medium"
-        title="Thêm Người Dùng"
+        size="large"
+        title="Create Project"
         placement="right"
         onClose={onClose}
         open={open}
       >
-        <AddUser />
+        <CreateProject />
       </Drawer>
 
-      <TabUser />
+      <TableProject />
     </div>
   );
 };
 
-export default UserManagement;
+export default ProjectManagement;

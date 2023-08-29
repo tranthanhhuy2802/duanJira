@@ -11,3 +11,6 @@ export const getDuLieuLocal = (ten) => {
     return null;
   }
 };
+export const deleteLocal = (ten) => {
+  localStorage.removeItem(ten);
+};

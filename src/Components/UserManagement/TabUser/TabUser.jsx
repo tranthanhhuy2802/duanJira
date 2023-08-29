@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Button, Drawer, Popconfirm, Space, Table, message } from "antd";
+import { Button, Drawer, Input, Popconfirm, Space, Table, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { userService } from "../../../services/userService";
-import { getAllUser } from "../../../redux/slice/userSlice";
+import { getAllUser, getUserById } from "../../../redux/slice/userSlice";
 import EditUser from "../EditUser/EditUser";
+import { SearchOutlined } from "@ant-design/icons";
 
 const TabUser = () => {
   const [open, setOpen] = useState(false);
+  // showDrawer
   const showDrawer = () => {
     setOpen(true);
   };
@@ -79,7 +81,9 @@ const TabUser = () => {
             <Button danger>Xóa</Button>
           </Popconfirm>
           <button
-            onClick={showDrawer}
+            onClick={() => {
+              showDrawer(), dispatch(getUserById(record.userId));
+            }}
             className="py-2 px-5 bg-yellow-400 text-white rounded-lg hover:bg-yellow-600 duration-500"
           >
             Sửa
@@ -94,10 +98,11 @@ const TabUser = () => {
   });
   return (
     <div>
-      <input
+      <Input
+        prefix={<SearchOutlined />}
         size="large"
         className="border-2 mb-5 w-full px-2 py-2"
-        placeholder="tìm kiếm ID"
+        placeholder="tìm kiếm"
         onChange={(event) => {
           console.log(event.target.value);
           dispatch(getAllUser(event.target.value));
