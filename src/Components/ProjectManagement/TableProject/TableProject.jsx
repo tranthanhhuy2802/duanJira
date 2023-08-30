@@ -19,7 +19,7 @@ import {
 import { projectService } from "../../../services/projectservice";
 import { SearchOutlined } from "@ant-design/icons";
 import EditProject from "../EditProject/EditProject";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 const TableProject = () => {
   const { projects } = useSelector((state) => {
@@ -156,7 +156,7 @@ const TableProject = () => {
         className="border-2 mb-5 w-full px-2 py-2"
         placeholder="tìm kiếm project name"
         onChange={(event) => {
-          console.log(event.target.value);
+          // console.log(event.target.value);
           dispatch(getAllProject(event.target.value));
         }}
       />

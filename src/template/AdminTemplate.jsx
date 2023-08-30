@@ -8,10 +8,11 @@ import {
   ProjectOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, Button, theme, Dropdown, Space } from "antd";
+import { Layout, Menu, Button, theme, Dropdown, Space, Drawer } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteLocal, getDuLieuLocal } from "../utils/localStore";
 import { getUserById, logOut } from "../redux/slice/userSlice";
+import CreateTask from "../Components/ProjectManagement/CreateTask/CreateTask";
 const { Header, Sider, Content } = Layout;
 
 const AdminTemplate = () => {
@@ -20,7 +21,14 @@ const AdminTemplate = () => {
   });
   // console.log(hoTen);
   const dispatch = useDispatch();
-
+  //Drawer create task
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
   // menu item
   const onClick = ({ key }) => {
     if (key == 2) {
@@ -65,6 +73,18 @@ const AdminTemplate = () => {
               key: "2",
               icon: <ProjectOutlined />,
               label: <NavLink to="/projectmanager">Project Manager</NavLink>,
+            },
+            {
+              key: "3",
+              icon: <ProjectOutlined />,
+              label: (
+                <Button
+                  className="border-0 text-white hover:text-Blue-500"
+                  onClick={showDrawer}
+                >
+                  Create Task
+                </Button>
+              ),
             },
           ]}
         />
@@ -119,6 +139,15 @@ const AdminTemplate = () => {
           <Outlet />
         </Content>
       </Layout>
+      <Drawer
+        size="large"
+        title="Create Task"
+        placement="right"
+        onClose={onClose}
+        open={open}
+      >
+        <CreateTask />
+      </Drawer>
     </Layout>
   );
 };

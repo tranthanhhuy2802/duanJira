@@ -22,6 +22,7 @@ const initialState = {
   users: [],
   editUser: [],
   listMembers: [],
+  userSearch: [],
 };
 
 export const userSlice = createSlice({
@@ -47,6 +48,7 @@ export const userSlice = createSlice({
       .addCase(getAllUser.fulfilled, (state, action) => {
         state.users = action.payload;
         state.listMembers = [action.payload];
+        state.userSearch = action.payload;
       })
       .addCase(getUserById.fulfilled, (state, action) => {
         // console.log(action.payload);
