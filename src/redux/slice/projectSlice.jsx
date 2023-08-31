@@ -68,7 +68,7 @@ const initialState = {
   projects: [],
   projectCategory: [],
   projectByName: {},
-  projectDetail: {},
+  projectDetail: [],
   projectMembers: [],
   nameProject: [],
   allTypeTask: [],

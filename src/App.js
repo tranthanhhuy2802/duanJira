@@ -7,6 +7,7 @@ import UserManagement from "./pages/UserMagement/UserManagement";
 import PageInformation from "./pages/PageInformation/PagaInformation";
 import ProjectManagement from "./pages/ProjectMangement/ProjectManagement";
 import ProjectDetail from "./Components/ProjectManagement/ProjectDetail/ProjectDetail";
+import TaskDetail from "./Components/ProjectManagement/TaskDetail.jsx/TaskDetail";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="projectmanager" element={<ProjectManagement />} />
           <Route path="projectDetail/:id" element={<ProjectDetail />} />
         </Route>
+        <Route path="/taskdetail" element={<TaskDetail />} />
       </Routes>
     </BrowserRouter>
   );

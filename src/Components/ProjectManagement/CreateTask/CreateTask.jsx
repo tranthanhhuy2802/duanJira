@@ -5,15 +5,18 @@ import { Input, Select, message, Slider, InputNumber } from "antd";
 import { Editor } from "@tinymce/tinymce-react";
 import {
   getAllPriority,
+  getAllProject,
   getAllStatus,
   getAllTypeTask,
   getAllUserByProjectId,
   getProjectCategory,
+  getProjectDetail,
 } from "../../../redux/slice/projectSlice";
 import { current } from "@reduxjs/toolkit";
 import { useState } from "react";
 import { getAllUser } from "../../../redux/slice/userSlice";
 import { taskService } from "../../../services/taskService";
+import { useNavigate } from "react-router-dom";
 
 const CreateTask = () => {
   const dispatch = useDispatch();
@@ -27,6 +30,7 @@ const CreateTask = () => {
   //   console.log(allTypeTask);
   // console.log(projectCategory);
   useEffect(() => {
+    dispatch(getAllProject());
     dispatch(getAllTypeTask());
     dispatch(getProjectCategory());
     dispatch(getAllPriority());
@@ -40,6 +44,7 @@ const CreateTask = () => {
     return { label: item.name, value: item.userId };
   });
   // console.log(userOptions);
+  const navigate = useNavigate();
   const [projectId, setProjectId] = useState();
   // console.log(projectId);
   //time tracking
@@ -69,7 +74,10 @@ const CreateTask = () => {
         .createTask(values)
         .then((res) => {
           console.log(res);
+          dispatch(getAllProject());
           alert("tạo Thành Công");
+          formik.resetForm();
+          navigate("/projectmanager");
         })
         .catch((error) => {
           console.log(error);

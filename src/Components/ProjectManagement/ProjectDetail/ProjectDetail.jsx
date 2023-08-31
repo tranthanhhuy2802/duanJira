@@ -79,7 +79,7 @@ const ProjectDetail = () => {
         </div>
       </div>
       <div>
-        <Board />
+        <Board projectId={projectId} />
       </div>
     </div>
   );
