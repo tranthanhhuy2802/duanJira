@@ -82,7 +82,7 @@ const TabUser = () => {
           </Popconfirm>
           <button
             onClick={() => {
-              showDrawer(), dispatch(getUserById(record.userId));
+              return showDrawer(), dispatch(getUserById(record.userId));
             }}
             className="py-2 px-5 bg-yellow-400 text-white rounded-lg hover:bg-yellow-600 duration-500"
           >

@@ -333,7 +333,7 @@ const TaskDetail = ({ projectId }) => {
                 options={projectDetail.members
                   ?.filter((mem) => {
                     let index = taskDetail.assigness?.findIndex((us) => {
-                      us.id === mem.userId;
+                      return us.id === mem.userId;
                     });
                     if (index !== -1) {
                       return false;
@@ -421,7 +421,7 @@ const TaskDetail = ({ projectId }) => {
                     name="originalEstimate"
                     type="number"
                     min="0"
-                    onChange={() => {
+                    onChange={(event) => {
                       settimeTracking({
                         ...timeTracking,
                         originalEstimate: event.target.value,
@@ -439,7 +439,7 @@ const TaskDetail = ({ projectId }) => {
                     type="number"
                     min="0"
                     value={values.timeTrackingSpent}
-                    onChange={() => {
+                    onChange={(event) => {
                       settimeTracking({
                         ...timeTracking,
                         timeTrackingSpent: event.target.value,
@@ -455,7 +455,7 @@ const TaskDetail = ({ projectId }) => {
                     name="timeTrackingRemaining"
                     type="number"
                     value={values.timeTrackingRemaining}
-                    onChange={() => {
+                    onChange={(event) => {
                       setFieldValue(
                         "timeTrackingRemaining",
                         event.target.value

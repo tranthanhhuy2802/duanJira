@@ -40,7 +40,7 @@ export const userSlice = createSlice({
       state.listMembers = action.payload;
     },
     logOut: (state, action) => {
-      (state.hoTen = null), deleteLocal("user");
+      return (state.hoTen = null), deleteLocal("user");
     },
   },
   extraReducers: (builder) => {

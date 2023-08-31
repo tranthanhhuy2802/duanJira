@@ -229,7 +229,7 @@ const CreateTask = () => {
                 name="originalEstimate"
                 type="number"
                 min="0"
-                onChange={() => {
+                onChange={(event) => {
                   settimeTracking({
                     ...timeTracking,
                     originalEstimate: event.target.value,
@@ -245,7 +245,7 @@ const CreateTask = () => {
                 name="timeTrackingSpent"
                 type="number"
                 min="0"
-                onChange={() => {
+                onChange={(event) => {
                   settimeTracking({
                     ...timeTracking,
                     timeTrackingSpent: event.target.value,
@@ -260,7 +260,7 @@ const CreateTask = () => {
                 id="timeTrackingRemaining"
                 name="timeTrackingRemaining"
                 type="number"
-                onChange={() => {
+                onChange={(event) => {
                   setFieldValue("timeTrackingRemaining", event.target.value);
                 }}
               />
