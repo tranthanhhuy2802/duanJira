@@ -42,7 +42,7 @@ const FormLogin = () => {
           }, [2000]);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           messageApi.error(error.response.data.message);
         });
     },

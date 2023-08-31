@@ -69,7 +69,7 @@ const TaskDetail = ({ projectId }) => {
         dispatch(getTaskDetail(taskId));
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         message.error("xóa thất bại");
       });
   };

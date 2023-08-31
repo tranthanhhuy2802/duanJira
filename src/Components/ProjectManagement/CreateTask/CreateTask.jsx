@@ -26,7 +26,7 @@ const CreateTask = () => {
   const { allPriority } = useSelector((state) => state.project);
   const { allStatus } = useSelector((state) => state.project);
   const { AllUserByProjectId } = useSelector((state) => state.project);
-  console.log(AllUserByProjectId);
+  // console.log(AllUserByProjectId);
   //   console.log(allTypeTask);
   // console.log(projectCategory);
   useEffect(() => {
@@ -68,19 +68,19 @@ const CreateTask = () => {
       projectId: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
 
       taskService
         .createTask(values)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           dispatch(getAllProject());
           alert("tạo Thành Công");
           formik.resetForm();
           navigate("/projectmanager");
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           alert("lỗi");
         });
     },

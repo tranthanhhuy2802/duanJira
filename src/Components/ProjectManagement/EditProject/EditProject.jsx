@@ -12,9 +12,9 @@ import {
 const CreateProject = () => {
   const dispatch = useDispatch();
   const { projectByName } = useSelector((state) => state.project);
-  console.log(projectByName);
+  // console.log(projectByName);
   const { projectCategory } = useSelector((state) => state.project);
-  console.log(projectCategory);
+  // console.log(projectCategory);
   //   gọi api category
   useEffect(() => {
     dispatch(getProjectCategory());
@@ -39,12 +39,12 @@ const CreateProject = () => {
       projectService
         .updateProject(projectId, { ...values })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           alert("Thay Đổi Thành Công");
           dispatch(getAllProject());
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           alert("lỗi");
         });
     },

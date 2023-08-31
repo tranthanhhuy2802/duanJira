@@ -2,15 +2,10 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { Input, message } from "antd";
-import {
-  LockOutlined,
-  UserOutlined,
-  PhoneOutlined,
-} from "@ant-design/icons";
+import { LockOutlined, UserOutlined, PhoneOutlined } from "@ant-design/icons";
 import { NavLink, useNavigate } from "react-router-dom";
 import { userService } from "../../services/userService";
 const FormSignUp = () => {
-
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -22,19 +17,19 @@ const FormSignUp = () => {
       phoneNumber: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
       //   xử lí gửi dữ liệu lên sever
       userService
         .signUpUser(values)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           messageApi.success("Đăng Kí Thành Công");
           setTimeout(() => {
             navigate("/");
           }, [2000]);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           messageApi.error(error.response.data.message);
         });
     },

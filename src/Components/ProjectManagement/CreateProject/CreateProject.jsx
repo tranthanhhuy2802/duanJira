@@ -28,18 +28,18 @@ const CreateProject = () => {
       alias: "",
     },
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
       projectService
         .createProject({
           ...values,
           alias: values.projectName,
         })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           alert("tạo Thành Công");
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           alert("lỗi");
         });
     },

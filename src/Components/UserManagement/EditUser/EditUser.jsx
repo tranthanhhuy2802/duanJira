@@ -38,7 +38,7 @@ const EditUser = () => {
           console.log(error);
           messageApi.error(error.response.data.message);
         });
-      formik.resetForm;
+      formik.resetForm();
     },
     validationSchema: yup.object({
       email: yup

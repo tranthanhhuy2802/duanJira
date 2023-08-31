@@ -25,22 +25,22 @@ const FormInformation = () => {
     enableReinitialize: true,
 
     onSubmit: (values) => {
-      console.log(values);
+      // console.log(values);
       //   xử lí gửi dữ liệu lên sever
       userService
         .editUser(values)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           messageApi.success("Thay Đổi Thông Tin Thành Công");
           setTimeout(() => {
             navigate("/");
           }, [1500]);
         })
         .catch((error) => {
-          console.log(error);
+          // console.log(error);
           messageApi.error(error.response.data.message);
         });
-      formik.resetForm;
+      formik.resetForm();
     },
     validationSchema: yup.object({
       email: yup
