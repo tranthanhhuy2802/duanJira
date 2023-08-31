@@ -85,6 +85,7 @@ const CreateTask = () => {
         });
     },
   });
+
   const editorRef = useRef(null);
 
   const { handleSubmit, handleChange, setFieldValue } = formik;
@@ -228,15 +229,14 @@ const CreateTask = () => {
               <InputNumber
                 name="originalEstimate"
                 type="number"
-                min="0"
-                onChange={(event) => {
+                onChange={(value) => {
+                  // console.log(value);
                   settimeTracking({
                     ...timeTracking,
-                    originalEstimate: event.target.value,
+                    originalEstimate: value,
                   });
-                  setFieldValue("originalEstimate", event.target.value);
+                  setFieldValue("originalEstimate", value);
                 }}
-                defaultValue="0"
               />
             </div>
             <div className="w-5/12">
@@ -245,12 +245,12 @@ const CreateTask = () => {
                 name="timeTrackingSpent"
                 type="number"
                 min="0"
-                onChange={(event) => {
+                onChange={(value) => {
                   settimeTracking({
                     ...timeTracking,
-                    timeTrackingSpent: event.target.value,
+                    timeTrackingSpent: value,
                   });
-                  setFieldValue("timeTrackingSpent", event.target.value);
+                  setFieldValue("timeTrackingSpent", value);
                 }}
               />
             </div>
@@ -260,8 +260,8 @@ const CreateTask = () => {
                 id="timeTrackingRemaining"
                 name="timeTrackingRemaining"
                 type="number"
-                onChange={(event) => {
-                  setFieldValue("timeTrackingRemaining", event.target.value);
+                onChange={(value) => {
+                  setFieldValue("timeTrackingRemaining", value);
                 }}
               />
             </div>

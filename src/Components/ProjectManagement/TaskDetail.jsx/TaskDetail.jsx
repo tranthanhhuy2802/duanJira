@@ -421,12 +421,12 @@ const TaskDetail = ({ projectId }) => {
                     name="originalEstimate"
                     type="number"
                     min="0"
-                    onChange={(event) => {
+                    onChange={(value) => {
                       settimeTracking({
                         ...timeTracking,
-                        originalEstimate: event.target.value,
+                        originalEstimate: value,
                       });
-                      setFieldValue("originalEstimate", event.target.value);
+                      setFieldValue("originalEstimate", value);
                     }}
                     defaultValue="0"
                     value={values.originalEstimate}
@@ -439,12 +439,12 @@ const TaskDetail = ({ projectId }) => {
                     type="number"
                     min="0"
                     value={values.timeTrackingSpent}
-                    onChange={(event) => {
+                    onChange={(value) => {
                       settimeTracking({
                         ...timeTracking,
-                        timeTrackingSpent: event.target.value,
+                        timeTrackingSpent: value,
                       });
-                      setFieldValue("timeTrackingSpent", event.target.value);
+                      setFieldValue("timeTrackingSpent", value);
                     }}
                   />
                 </div>
@@ -455,11 +455,8 @@ const TaskDetail = ({ projectId }) => {
                     name="timeTrackingRemaining"
                     type="number"
                     value={values.timeTrackingRemaining}
-                    onChange={(event) => {
-                      setFieldValue(
-                        "timeTrackingRemaining",
-                        event.target.value
-                      );
+                    onChange={(value) => {
+                      setFieldValue("timeTrackingRemaining", value  );
                     }}
                   />
                 </div>
