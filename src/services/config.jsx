@@ -4,7 +4,7 @@ import { getDuLieuLocal } from "../utils/localStore";
 const BASE_URL = "https://jiranew.cybersoft.edu.vn/";
 
 const TokenCybersoft =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJOb2RlSlMgMzQiLCJIZXRIYW5TdHJpbmciOiIyMi8wMy8yMDI0IiwiSGV0SGFuVGltZSI6IjE3MTEwNjU2MDAwMDAiLCJuYmYiOjE2OTMwNjkyMDAsImV4cCI6MTcxMTIxMzIwMH0.I9k3be3bbxp64NISKJ-A3aR6mEhF4QfCGakizTqBON8";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJOb2RlSlMgMzQiLCJIZXRIYW5TdHJpbmciOiIxMS8wNC8yMDI0IiwiSGV0SGFuVGltZSI6IjE3MTI3OTM2MDAwMDAiLCJuYmYiOjE2OTMwNjkyMDAsImV4cCI6MTcxMjk0MTIwMH0.dcAxAOtlLVw2muO5YfsiVtNNxI5pFOC3YUAx-VQvbPQ";
 
 const tokkenAuthorization = getDuLieuLocal("user");
 const configHeaderAxios = () => {
